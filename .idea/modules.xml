@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FusedLocationProviderOnHandlerThread.iml" filepath="$PROJECT_DIR$/FusedLocationProviderOnHandlerThread.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fused_location_provider_on_handler_thread.iml" filepath="$PROJECT_DIR$/fused_location_provider_on_handler_thread.iml" />
     </modules>
   </component>
 </project>

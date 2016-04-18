@@ -14,6 +14,7 @@ import android.os.Message;
 import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -26,7 +27,10 @@ import com.google.android.gms.location.LocationServices;
  */
 public class LocationUpdateService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    public static final String IntentLocationUpdateStopService = "android.intent.extra._LOCATION_UPDATE_STOP_SERVICE";
+    public static final String IntentActionLocationUpdate = "android.intent.action._LOCATION_UPDATE_INCOMMING";
+
+    public static final String IntentExtraLocationUpdateStopService = "android.intent.extra._LOCATION_UPDATE_STOP_SERVICE";
+    public static final String IntentExtraLocationUpdateNewLocation = "android.intent.extra._LOCATION_UPDATE_NEW_LOCATION";
 
     private static String logTag_ = LocationUpdateService.class.getSimpleName();
     private GoogleApiClient googleApiClient_ = null;
@@ -44,7 +48,9 @@ public class LocationUpdateService extends Service implements GoogleApiClient.Co
         @Override
         public void onLocationChanged(Location location) {
             App.log(App.LOG_INFO, logTag_, location.toString());
-
+            Intent intent = new Intent(IntentActionLocationUpdate);
+            intent.putExtra(IntentExtraLocationUpdateNewLocation, location);
+            LocalBroadcastManager.getInstance(LocationUpdateService.this).sendBroadcast(intent);
         }
     }
 
@@ -130,7 +136,7 @@ public class LocationUpdateService extends Service implements GoogleApiClient.Co
 
         boolean stopService = false;
         if (intent != null) {
-            stopService = intent.getBooleanExtra(IntentLocationUpdateStopService, false);
+            stopService = intent.getBooleanExtra(IntentExtraLocationUpdateStopService, false);
         }
         App.log(App.LOG_INFO, logTag_, "stopService = " + stopService);
         if (stopService) {
