@@ -1,2 +1,2 @@
 # google_fused_location_provider_on_handler_thread_example
-An example to show how to get GPS location info from Google Fused Location Provider via a handler thread
+Currently there are two ways to get the GPS location info from Android devices, one is from the Location Manager framework which is the traditional way, the other is from the Fused Location Provider which is one of the location APIs in Google Play services and has more features than the former one, hence recommended by Google. This example shows how to get GPS location info from Google Fused Location Provider via a handler thread so the normal UI activity won't be affectted.
